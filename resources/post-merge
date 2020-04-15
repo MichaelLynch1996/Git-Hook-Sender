@@ -1,0 +1,24 @@
+branch=$(git rev-parse --abbrev-ref HEAD)
+master="master"
+nonprod="nonprod"
+
+api_endpoint="http://localhost:9000/receiver"
+
+function callPOSTService {
+    curl -X POST -i -H "Content-type: application/json" -X POST "$api_endpoint" -d '
+        {
+            "payload":"this is a json payload"
+        }
+        '
+}
+
+echo "\n\n executing post-merge hook \n\n "
+
+if [ "$branch" == "$master" ]; then
+  echo 'Merging into master. Prepare to hit receiver endpoint...\n'
+  callPOSTService
+elif [ "$branch" == "$nonprod" ]; then
+  echo 'Merging into nonprod. Prepare to hit receiver endpoint...\n'
+else
+  echo "Merging into neither master or nonprod"
+fi
