@@ -9,9 +9,11 @@ In this case, a sample post-merge hook does not exist. We will make one.
 
 ##Instructions (MacOS):
 
-###Copy post-merge executable found in resources to .git/hooks
+###Copy post-merge executable found in resources to .git/hooks:
+
 cp resources/post-merge ./.git/hooks/post-merge
 
 ###Make post-merge executable:
+
 chmod +x ./.git/hooks/post-merge
 
